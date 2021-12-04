@@ -26,13 +26,18 @@ while not blackjack:
     another = input("Another card? ")
   if another == "y":
     player.append(new_card())
-    print(player)
+    print(f"Player's cards: {player}")
   if sum(player)>21:
     print("Computer WINS!")
     blackjack = True
   if another == "n":
-    computer.append(new_card())
-    print(computer)
+    if sum_computer<=16:
+      computer.append(new_card())
+    if sum_computer>16:
+      print(f"Computer's cards: {computer}")
   if sum(computer)>21:
     print("Player WINS!")
+    print(f"Computer's cards: {computer}")
+    print(f"Player's cards: {player}")
+
     blackjack = True
