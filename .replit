@@ -17,6 +17,22 @@ print(f"Player cards: {player}")
 print(f"Computer cards: {computer}")
 
 sum_player = sum(player)
-print(sum_player)
 sum_computer = sum(computer)
-print(sum_computer)
+
+blackjack = False
+
+while not blackjack:
+  if sum(player)<21:
+    another = input("Another card? ")
+  if another == "y":
+    player.append(new_card())
+    print(player)
+  if sum(player)>21:
+    print("Computer WINS!")
+    blackjack = True
+  if another == "n":
+    computer.append(new_card())
+    print(computer)
+  if sum(computer)>21:
+    print("Player WINS!")
+    blackjack = True
