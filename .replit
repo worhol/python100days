@@ -8,36 +8,52 @@ cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 def new_card():
   return random.choice(cards)
+
   
 
 player = [new_card(),new_card()]
 computer = [new_card(), new_card()]
-
-print(f"Player cards: {player}")
-print(f"Computer cards: {computer}")
-
 sum_player = sum(player)
 sum_computer = sum(computer)
+
+print(f"Your cards: {player}, current score: {sum_player}")
+print(f"Computer's first hand:  {computer[0]}")
+
+
+def complays():
+  if sum_computer<=16:
+    computer.append(new_card())
+  elif sum_computer>16:
+    print(computer)
 
 blackjack = False
 
 while not blackjack:
   if sum(player)<21:
-    another = input("Another card? ")
+    another = input("Type 'y' to get another card, type 'n' to pass: ")
   if another == "y":
     player.append(new_card())
-    print(f"Player's cards: {player}")
+    print(f"Your cards: {player}, current score {sum_player}")
   if sum(player)>21:
-    print("Computer WINS!")
+    # print(f"Your final hand {player}, final score {sum_player}")
     blackjack = True
   if another == "n":
-    if sum_computer<=16:
-      computer.append(new_card())
-    if sum_computer>16:
-      print(f"Computer's cards: {computer}")
-  if sum(computer)>21:
-    print("Player WINS!")
-    print(f"Computer's cards: {computer}")
-    print(f"Player's cards: {player}")
-
+    while sum_computer<=16:
+      complays()
+      sum_computer=sum(computer)
+      if sum_computer>16:
+        blackjack=True
+  if sum_computer>21:
     blackjack = True
+
+  print(f"Your final hand: {player}, final score {sum_player}")
+  print(f"Computer's final hand:  {computer}, final score {sum_computer}")
+  if sum_player>sum_computer:
+      print("Player Wins!")
+  elif sum_computer>sum_player:
+      print("Computer Wins")
+  else:
+      print("It's a draw")
+
+  blackjack = True
+
